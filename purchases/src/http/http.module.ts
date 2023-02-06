@@ -3,8 +3,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import path from 'node:path';
+import { CustomersResolver } from 'src/http/graphql/resolvers/customer.resolver';
+import { PurchasesResolver } from 'src/http/graphql/resolvers/purchases.resolver';
+import { CustomersService } from 'src/services/customers.service';
+import { ProductsService } from 'src/services/products.service';
+import { PurchasesService } from 'src/services/purchases.service';
 import { DatabaseModule } from '../database/database.module';
-import { HelloResolver} from './hello/hello.resolver';
+import { ProductsResolver } from './graphql/resolvers/products.resolver';
 
 @Module({
   imports: [
@@ -15,6 +20,16 @@ import { HelloResolver} from './hello/hello.resolver';
       autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql')
     })
   ],
-  providers: [HelloResolver]
+  providers: [
+    // Resovers
+    ProductsResolver, 
+    PurchasesResolver,
+    CustomersResolver,
+
+    // Services
+    ProductsService, 
+    PurchasesService,
+    CustomersService,
+  ]
 })
 export class HttpModule {}

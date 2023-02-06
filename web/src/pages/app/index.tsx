@@ -18,25 +18,25 @@ export default function Home() {
   )
 };
 
-export const getServerSideProps = withPageAuthRequired();
+// export const getServerSideProps = withPageAuthRequired();
 
 
-// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-//   const session = getSession(req, res);
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = getSession(req, res);
 
-//   const token = await getAccessToken(req, res);
-//   console.log(token);
+  const token = await getAccessToken(req, res);
+  console.log(token);
 
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: 'api/auth/login',
-//         permanent: false
-//       }
-//     }
-//   }
+  if (!session) {
+    return {
+      redirect: {
+        destination: 'api/auth/login',
+        permanent: false
+      }
+    }
+  }
 
-//   return {
-//     props: {}
-//   }
-// }
+  return {
+    props: {}
+  }
+}
