@@ -20,7 +20,7 @@ export class CoursesResolver {
 
   @ResolveField() 
   enrollment(@Parent() course: Course){
-    // Fazer o field
+    
   }
 
 }
